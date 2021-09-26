@@ -10,7 +10,7 @@ export default class Rooms extends Component {
       loaded: false,
       chatRooms: []
     };
-    this.api = "http://localhost:9001/api/chat/rooms";
+    this.api = "http://localhost:8000/chat/api/chat/rooms";
   }
 
   componentDidMount() {

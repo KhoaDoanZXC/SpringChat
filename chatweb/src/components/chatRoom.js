@@ -14,8 +14,8 @@ export default class ChatRoom extends Component {
     };
     this.roomId = this.props.match.params.id;
     
-    this.api = `http://localhost:9002/api/chat/${this.roomId}`;
-    this.endPoint = 'http://localhost:9002/ws';
+    this.api = `http://localhost:8000/chat/api/chat/${this.roomId}`;
+    this.endPoint = 'http://localhost:9001/ws';
     this.topic =  `/topic/${this.roomId}`;
     this.destination = `/app/${this.roomId}`;
   }
@@ -35,7 +35,7 @@ export default class ChatRoom extends Component {
     if (messageContent && this.clientRef) {
       this.clientRef.sendMessage(`${this.destination}/chat`,
         JSON.stringify({
-          userId: Cookies.get("Authorization"),
+          userId: Cookies.get("ID"),
           text: this.state.inputMessage,
           type: 'CHAT'
         }));
@@ -45,7 +45,7 @@ export default class ChatRoom extends Component {
   onConnect = () => {
     this.clientRef.sendMessage(`${this.destination}/join`, 
       JSON.stringify({
-        userId: Cookies.get("Authorization"),
+        userId: Cookies.get("ID"),
         type: 'JOIN'
       }));
     console.log('Connected');
@@ -65,7 +65,7 @@ export default class ChatRoom extends Component {
 
   componentDidMount() {
     axios.get(this.api, {headers: {
-      "Authorization": Cookies.get("Authorization")}
+      "Authorization": `Bearer ${Cookies.get("token")}`}
     })
     .then(res => {
       this.setState({

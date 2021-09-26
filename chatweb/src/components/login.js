@@ -11,7 +11,7 @@ export default class Login extends Component {
       username: "",
       password: ""
     };
-    this.api = "http://localhost:9000/api/user/login";
+    this.api = "http://localhost:8000/user/api/user/login";
   }
 
   onChangeUsername = e => {
@@ -30,9 +30,10 @@ export default class Login extends Component {
       password: this.state.password
     })
     .then(res => {
-      console.log(res.headers.authorization);
+      console.log(res);
       if (res.status === 200) {
-        Cookies.set("Authorization", res.headers.token);
+        Cookies.set("token", res.headers.token);
+        Cookies.set("ID", this.state.username);
         this.props.history.push('/rooms');
       }
     })
@@ -43,7 +44,8 @@ export default class Login extends Component {
     return (
       <Container>
       <Form onSubmit={this.onSubmit}>
-        <Form.Control name="username" type="text" onChange={this.onChangeUsername} value={this.state.username} required />
+        <Form.Control name="username" type="text" onChange={this.onChangeUsername} value={this.state.username} placeholder="username" required />
+        <Form.Control name="password" type="password" onChange={this.onChangePassword} value={this.state.password} placeholder="password" required />
         <Button variant="primary" size="block" type="submit">
           Login
         </Button>
