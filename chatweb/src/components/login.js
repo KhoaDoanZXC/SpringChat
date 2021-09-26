@@ -8,28 +8,31 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: ""
+      username: "",
+      password: ""
     };
-    this.api = "http://localhost:8080/auth/login";
-    this.headers = {
-      'Access-Control-Allow-Origin': 'http://localhost:3000'
-    }
+    this.api = "http://localhost:9000/api/user/login";
   }
 
   onChangeUsername = e => {
     this.setState({username: e.target.value});
   }
 
+  onChangePassword = e => {
+    this.setState({password: e.target.value});
+  }
+
   onSubmit = e => {
     console.log('submitted');
     e.preventDefault();
     axios.post(this.api, {
-      username: this.state.username
+      username: this.state.username,
+      password: this.state.password
     })
     .then(res => {
       console.log(res.headers.authorization);
       if (res.status === 200) {
-        Cookies.set("Authorization", res.headers.authorization);
+        Cookies.set("Authorization", res.headers.token);
         this.props.history.push('/rooms');
       }
     })

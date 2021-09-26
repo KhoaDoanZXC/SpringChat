@@ -10,12 +10,12 @@ export default class Rooms extends Component {
       loaded: false,
       chatRooms: []
     };
-    this.api = "http://localhost:8080/api/rooms";
+    this.api = "http://localhost:9001/api/chat/rooms";
   }
 
   componentDidMount() {
     axios.get(this.api, {headers: {
-      "Authorization": Cookies.get("Authorization")}
+      "Authorization": `Bearer ${Cookies.get("token")}`}
     })
     .then(res => {
       this.setState({

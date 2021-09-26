@@ -14,8 +14,8 @@ export default class ChatRoom extends Component {
     };
     this.roomId = this.props.match.params.id;
     
-    this.api = `http://localhost:8080/api/chat/${this.roomId}`;
-    this.endPoint = 'http://localhost:8080/ws';
+    this.api = `http://localhost:9002/api/chat/${this.roomId}`;
+    this.endPoint = 'http://localhost:9002/ws';
     this.topic =  `/topic/${this.roomId}`;
     this.destination = `/app/${this.roomId}`;
   }
