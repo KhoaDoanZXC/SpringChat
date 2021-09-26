@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/chat")
 public class ChatRoomAPI {
 	private static final Logger log = LoggerFactory.getLogger(ChatRoomAPI.class);
 	private final IChatRoomService chatRoomService;
@@ -36,7 +36,7 @@ public class ChatRoomAPI {
 		return ResponseEntity.status(200).body(chatRoomService.getAllRooms());
 	}
 
-	@GetMapping("/chat/{roomId}")
+	@GetMapping("/{roomId}")
 	public ResponseEntity<List<ChatMessage>> chat(HttpServletRequest request,
 												  @PathVariable("roomId") String roomId) {
 		String username = request.getHeader("Authorization");
