@@ -60,12 +60,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
 			throws IOException, ServletException {
-		String userId = userDetailsService.findUserByUsername(authResult.getName()).getId();
+		String username = authResult.getName();
 
 		String token = JWT.create()
-				.withSubject(userId)
-				.withExpiresAt(new Date(System.currentTimeMillis() + Long.parseLong(env.getProperty("token.expiration"))))
-				.sign(Algorithm.HMAC512(env.getProperty("token.secret")));
+				.withSubject(username)
+				.withExpiresAt(new Date(System.currentTimeMillis() + Integer.parseInt(env.getProperty("token.expiration"))))
+				.sign(Algorithm.HMAC512(env.getProperty("token.secret").getBytes()));
 
 		response.addHeader("token", token);
 	}
