@@ -72,6 +72,5 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.sign(Algorithm.HMAC512(env.getProperty("token.secret")));
 
 		response.addHeader("token", token);
-		response.addHeader("userId", userId);
 	}
 }
