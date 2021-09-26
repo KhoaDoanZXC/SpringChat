@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooms</title>
+</head>
+<body>
+<table class="tftable" border="1">
+    <tr>
+        <td>Meme</td>
+        <td colspan="4">
+            <input type="button" value="Join" th:onclick="|window.location.href='@{'/chat/' + '614c9dfc01926266a341ada1'}'|"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Public</td>
+        <td colspan="4">
+            <input type="button" value="Join" th:onclick="|window.location.href='@{'/chat/' + '614c9dfc01926266a341ada2'}'|"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Public 2</td>
+        <td colspan="4">
+            <input type="button" value="Join" th:onclick="|window.location.href='@{'/chat/' + '614c9dfc01926266a341ada3'}'|"/>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
